@@ -1,6 +1,11 @@
 library(commspacetime)
 library(dplyr)
 library(ggplot2)
+library(lubridate)
+
+both.years.subset <- read.csv("~/Google_Drive/School/Research/Thesis/both.years.subset.csv")
+
+both.years.subset$date <- mdy(both.years.subset$date)
 
 both.years.subset$absorption <- with(both.years.subset, 
                                      find_absorption(mean.center.freq, temp,

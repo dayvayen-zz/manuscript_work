@@ -76,6 +76,11 @@ source.level.model.date <- lme(source.level ~ median.db + temp + date,
                           method = "ML",
                           data = both.years.subset)
 
+source.level.model.date.interact <- lme(source.level ~ median.db + temp * date,
+                               random = ~1|site,
+                               method = "ML",
+                               data = both.years.subset)
+
 source.level.model.interact <- lme(source.level ~ median.db * temp,
                           random = ~1|site,
                           method = "ML",
@@ -84,7 +89,6 @@ source.level.model.interact <- lme(source.level ~ median.db * temp,
 anova(source.level.model, source.level.model.date, source.level.model.interact, source.level.model.date.interact)
 
 # final models -----
-
 source.level.model.final <- lme(source.level ~ median.db + temp + date,
                                random = ~1|site,
                                data = both.years.subset)

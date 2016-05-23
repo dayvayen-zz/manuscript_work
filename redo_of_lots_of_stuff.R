@@ -464,20 +464,15 @@ print(xtable(radius.summary), floating = F)
 
 library(visreg)
 
-dur.partial <- visreg(downsamp.duration.model, "median.db", type = "conditional",
-       xlab = "Noise level \n(dB re 20 micropascals)", 
-       ylab = "Duration (s)",
-       main = "Partial regression: noise vs. duration")
+dur.partial <- visreg(duration.model.final, "median.db", type = "conditional", 
+       ylab = "Duration (s)")
 
-callrate.partial <- visreg(downsamp.callrate.model, "median.db", type = "conditional",
-       xlab = "Noise level \n(dB re 20 micropascals)",
-       ylab = "Call rate (calls/min)",
-       main = "Partial regression: noise vs. call rate")
+callrate.partial <- visreg(callrate.model.final, "median.db", type = "conditional",
+       ylab = "Call rate (calls/min)")
 
 total.time.partial <- visreg(total.time.model, "median.db", type = "conditional",
        xlab = "Noise level \n(dB re 20 micropascals)",
-       ylab = "Total time spent calling (s/min)",
-       main = "Partial regression: noise vs. total time calling")
+       ylab = "Total time spent calling (s/min)")
 
 # total time ----
 
