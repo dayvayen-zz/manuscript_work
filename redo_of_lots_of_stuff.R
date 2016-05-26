@@ -427,7 +427,7 @@ stargazer(downsamp.callrate.model, downsamp.freq.model, downsamp.duration.model,
           type = "html")
 
 grouped.both.years <- group_by(both.years.subset,site)
-by.site <- dplyr::summarise(grouped.both.years, 
+by.site <- summarise(grouped.both.years, 
                      n = n(),
                      med.source.level = median(source.level),
                      iqr.source.level = IQR(source.level),
@@ -436,8 +436,7 @@ by.site <- dplyr::summarise(grouped.both.years,
                      meanfreq = mean(mean.center.freq),
                      sdfreq = sd(mean.center.freq),
                      meanduration = mean(mean.duration),
-                     sdduration = sd(mean.duration),
-                      distance = mean())
+                     sdduration = sd(mean.duration))
 
 names(by.site) <- c("Site", "n", "Median \n source level", "IQR \n source level",
                     "Mean \n callrate", "SD \n callrate", "Mean centroid \n frequency",

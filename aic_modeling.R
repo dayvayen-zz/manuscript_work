@@ -19,7 +19,7 @@ callrate.model.date.interact <- lme(callrate ~ median.db + temp*date,
                                     method = "ML",
                                     data = both.years.subset)
 
-anova(callrate.model, callrate.model.date, callrate.model.interact,callrate.model.date.interact)
+callrate.anova <- anova(callrate.model, callrate.model.date, callrate.model.interact,callrate.model.date.interact)
 
 
 duration.model <- lme(mean.duration ~ median.db + temp,
