@@ -44,3 +44,16 @@ dur.aic <- dredge(duration.model.full)
 
 # best fit is date and temp -- not noise at all
 
+# final models ----
+
+duration.model.centered <- lme(mean.duration ~ center.temp + center.julian,
+                               random = ~1|site,
+                               data = both.years.subset)
+
+freq.model.centered <- lme(mean.center.freq ~ center.noise + center.temp + center.julian,
+                           random = ~1|site,
+                           data = both.years.subset)
+
+callrate.model.centered <- lme(callrate ~ center.noise + center.temp,
+                               random = ~1|site,
+                               data = both.years.subset)
