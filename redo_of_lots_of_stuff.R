@@ -92,7 +92,7 @@ names(newdat) <- c("temp", "median.db")
 # total time model?----
 
 total.time.model <- lme(total.time ~ median.db + temp,
-                        random = ~1|site,
+                        random = ~1|site/date,
                         data = both.years.subset)
 
 total.time.predict <- predict(total.time.model, newdat, level = 0)

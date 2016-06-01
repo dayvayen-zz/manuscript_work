@@ -1,7 +1,9 @@
+library(nlme)
+
 # aic testing of every. single. damn. model. -----
 
 callrate.model <- lme(callrate ~ median.db + temp,
-                      random = ~1|site,
+                      random = ~1|site/date,
                       method = "ML",
                       data = both.years.subset)
 
@@ -23,7 +25,7 @@ callrate.anova <- anova(callrate.model, callrate.model.date, callrate.model.inte
 
 
 duration.model <- lme(mean.duration ~ median.db + temp,
-                      random = ~1|site,
+                      random = ~1|site/date,
                       method = "ML",
                       data = both.years.subset)
 

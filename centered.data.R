@@ -3,10 +3,11 @@
 both.years.subset$center.julian <- scale(both.years.subset$julian, scale = F, center = T)
 both.years.subset$center.temp <- scale(both.years.subset$temp, scale = F, center = T)
 both.years.subset$center.noise <- scale(both.years.subset$median.db, scale = F, center = T)
+both.years.subset$center.numeric.date <- scale(both.years.subset$numeric.date, scale = F, center = T)
 
 # call rate models -----
 
-callrate.model.full <- lme(callrate ~ center.noise*center.temp*center.julian,
+callrate.model.full <- lme(callrate ~ center.noise*center.temp*center.numeric.date,
                            random = ~1|site,
                            data = both.years.subset)
 
@@ -16,7 +17,7 @@ callrate.aic <- dredge(callrate.model.full)
 
 # freq models ----
 
-freq.model.full <- lme(mean.center.freq ~ center.noise*center.temp*center.julian,
+freq.model.full <- lme(mean.center.freq ~ center.noise*center.temp*center.numeric.date,
                        random = ~1|site,
                        data = both.years.subset)
 
@@ -26,7 +27,7 @@ freq.aic <- dredge(freq.model.full)
 
 # source level models ----
 
-source.level.model.full <- lme(source.level ~ center.noise*center.temp*center.julian,
+source.level.model.full <- lme(source.level ~ center.noise*center.temp*center.numeric.date,
                                random = ~1|site,
                                data = both.years.subset)
 
@@ -57,3 +58,15 @@ freq.model.centered <- lme(mean.center.freq ~ center.noise + center.temp + cente
 callrate.model.centered <- lme(callrate ~ center.noise + center.temp,
                                random = ~1|site,
                                data = both.years.subset)
+
+# apparently I need to do this stepwise?
+
+dur.null <- lme(mean.duration ~ 1,
+                  random = ~1|site,
+                  method = "REML",
+                  data = both.years.subset)
+
+dur.full <- lme(mean.duration ~ center.temp * center.noise * center.numeric.date,
+                  random = ~1|site,
+                  method = "REML",
+                  data = both.years.subset)
