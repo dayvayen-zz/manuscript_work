@@ -38,8 +38,8 @@ stargazer(callrate.model.final, freq.model.final,duration.model.final, source.le
           notes = NULL,
           title = "Model summary",
           omit.table.layout = "n",
-          covariate.labels = c("Intercept", "Median noise level", "Temperature", "Date", "Date:Temperature"),
-          dep.var.labels = c("Call rate in calls/min", "Frequency in Hz", "Duration in s", "Source level in dB \nre 20 micropascals"))
+          covariate.labels = c("Intercept", "Median noise level", "Temperature"),
+          dep.var.labels = c("Call rate in calls/min", "Frequency in Hz", "Log(Duration in s)", "Source level in dB \nre 20 micropascals"))
 
 # what else do I need? 
 # Site information table ----
@@ -105,3 +105,7 @@ parameters.table <- as.data.frame(cbind(parameters, units))
 names(parameters.table) <- c("Parameter", "Units")
 
 stargazer(parameters.table, summary = F)
+
+# Total time and time volume table ====
+
+radius.summary$"Total Time"
