@@ -77,7 +77,7 @@ dur.ci <- ggplot(duration.ints, aes(x = type, y = est)) +
   geom_errorbar(width = .15, aes(ymin = lower, ymax = upper)) + 
   theme_bw() +
   geom_hline(aes(yintercept=1), linetype = "dashed") +
-  ylab("Duration \nslope estimate") +
+  ylab("Duration proportion \nchange estimate") +
   xlab(NULL) + 
   annotate("text", x = 2, y = .9, label = "*", size = 12) +
   theme(text = element_text(size = 14))
@@ -104,4 +104,14 @@ ggplot() +
   ylab("Radius (m)") +
   xlab("RMS received level (RL) in 1-4.5kHz\n bandwidth (dB re 20 micropascals)") +
   theme_bw()
-  
+
+rgl.open()
+rgl.bg(color="white")
+rgl.clipplanes(0,1,0,.0001)
+rgl.spheres(0,0,0,507.2757,color="#0000ff",front="line",back="line",lwd=1,lit=FALSE)
+rgl.spheres(0,0,0,507.2757,color="#0000ff",alpha=0.1)
+rgl.spheres(800,0,0,17.42,color="#cc0000",front="line",back="line",lwd=1,lit=FALSE)
+rgl.spheres(0,0,0,17.42,color="#cc0000",alpha=0.1)
+axes3d(color = "#000000", alpha = 1, expand = 1.03, labels = F)
+grid3d(side = c("z", "x","y"), col = "black")
+snapshot3d("hemispheres.png")

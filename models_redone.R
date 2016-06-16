@@ -111,10 +111,7 @@ duration.model.final <- lme(nlog.dur ~ median.db + temp,
 
 
 plot(both.years.subset$median.db, both.years.subset$radius, type = "p")
-rad.mod.glmer.ident <- glmer(radius ~ center.noise + center.temp +
-                         (1|site),
-                       family = Gamma(link = identity),
-                        data = both.years.subset)
+
 
 rad.mod.glmer.log <- glmer(radius ~ median.db + temp +
                              (1|site),

@@ -2,30 +2,6 @@
 library(stargazer)
 library(xtable)
 
-# AIC tables ----
-stargazer(callrate.model, callrate.model.date, callrate.model.interact,callrate.model.date.interact,
-          intercept.bottom = F,
-          omit.table.layout = "n",
-          title = "Call rate model selection",
-          covariate.labels = c("Intercept", "Median noise level", "Temperature", "Date", "Noise:Temperature", "Temperature:Date"))
-
-stargazer(freq.model, freq.model.date, freq.model.interact,freq.model.date.interact,
-          intercept.bottom = F,
-          omit.table.layout = "n",
-          title = "Frequency model selection",
-          covariate.labels = c("Intercept", "Median noise level", "Temperature", "Date", "Noise:Temperature", "Temperature:Date"))
-
-stargazer(duration.model, duration.model.date, duration.model.interact,duration.model.date.interact,
-          intercept.bottom = F,
-          omit.table.layout = "n",
-          title = "Duration model selection",
-          covariate.labels = c("Intercept", "Median noise level", "Temperature", "Date", "Noise:Temperature", "Temperature:Date"))
-
-stargazer(source.level.model, source.level.model.date, source.level.model.interact,source.level.model.date.interact,
-          intercept.bottom = F,
-          omit.table.layout = "n",
-          title = "Source level model selection",
-          covariate.labels = c("Intercept", "Median noise level", "Temperature", "Date", "Noise:Temperature", "Temperature:Date"))
 
 
 
@@ -107,6 +83,17 @@ names(parameters.table) <- c("Parameter", "Units")
 
 stargazer(parameters.table, summary = F)
 
-# Total time and time volume table ====
 
-radius.summary$"Total Time"
+# radius model table
+stargazer(rad.mod.glmer.log,
+          apply.coef = exp,
+          report = "vcp*", 
+          intercept.bottom = F, 
+          single.row = T, 
+          omit.stat = c("aic", "bic", "ll", "lr"),
+          notes = NULL,
+          title = "Radius model summary",
+          omit.table.layout = "n",
+          covariate.labels = c("Intercept", "Median noise level", "Temperature"),
+          dep.var.labels = "Radius (m)",
+          align = T)
