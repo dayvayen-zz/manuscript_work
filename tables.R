@@ -37,6 +37,7 @@ stargazer(callrate.model.final, freq.model.final,duration.model.final, source.le
           omit.stat = c("aic", "bic", "ll", "lr"),
           notes = NULL,
           title = "Model summary",
+          type = "text",
           omit.table.layout = "n",
           covariate.labels = c("Intercept", "Median noise level", "Temperature"),
           dep.var.labels = c("Call rate in calls/min", "Frequency in Hz", "Log(Duration in s)", "Source level in dB \nre 20 micropascals"))

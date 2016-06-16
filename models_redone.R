@@ -29,9 +29,8 @@ qqnorm(dur.res)
 qqline(dur.res)
 # no good-- definitely balloons outward.
 
-duration.model <- lme(mean.duration ~ median.db + temp,
+duration.model.nolog <- lme(mean.duration ~ median.db + temp,
                       random = ~1|site/date,
-                      weights = vdur5,
                       data = both.years.subset)
 
 dur <- both.years.subset$mean.duration
@@ -106,6 +105,25 @@ duration.model.final <- lme(nlog.dur ~ median.db + temp,
                        random = ~1|site/date,
                        data = both.years.subset)
 
-total.time.model <- lme(total.time ~ median.db + temp,
-                        random = ~1|site/date,
+
+
+# working with the radius model -----
+
+
+plot(both.years.subset$median.db, both.years.subset$radius, type = "p")
+rad.mod.glmer.ident <- glmer(radius ~ center.noise + center.temp +
+                         (1|site),
+                       family = Gamma(link = identity),
                         data = both.years.subset)
+
+rad.mod.glmer.log <- glmer(radius ~ median.db + temp +
+                             (1|site),
+                           family = Gamma(link = log),
+                           data = both.years.subset) # this one works the best
+
+radius.fixed <-as.data.frame(coef(summary(rad.mod.glmer.log))[, "Estimate"])
+radius.fixed <- exp(radius.fixed)
+
+
+radius.predict <- predict(rad.mod.glmer.log, newdat, type = "response")
+
